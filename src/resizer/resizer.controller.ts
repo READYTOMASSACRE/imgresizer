@@ -27,7 +27,7 @@ export class ResizerController {
     if (filePath === false) {
       return res.status(HttpStatus.NOT_FOUND).send({ statusCode: 404 })
     } else {
-      return res.sendFile(filePath, { root: '_image' })
+      return res.sendFile(filePath)
     }
   }
 }

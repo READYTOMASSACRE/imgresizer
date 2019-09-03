@@ -1,6 +1,5 @@
 import { Injectable, HttpException, HttpStatus } from "@nestjs/common";
 import { statSync, existsSync, mkdirSync } from 'fs'
-import { resolve, join } from 'path'
 import { BFileService } from "./bfile.service";
 import { BFile } from "./entities/bfile.entity";
 import * as sharp from 'sharp'
@@ -51,12 +50,16 @@ export class ResizerService {
           const source = this.getSourceFile(bFile)
           const destination = this.getDestinationFile(bFile, width, height, type)
 
+          statSync(source)
+
           await this.cropImage(source, destination, width, height)
           await this.optimizeImage(destination, type)
 
-          return destination.replace(this.getDestinationDir(), '')
+          return destination
         } catch (e) {
           if (e instanceof HttpException) throw e
+
+          return this.config.get('NO_IMAGE')
         }
       }
     }
