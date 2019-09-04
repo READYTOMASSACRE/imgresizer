@@ -35,8 +35,9 @@ export class ResizerService {
     type = this.validateType(type)
 
     try {
-      const filename = `/${id}/` + this.makeFileName(id, width, height, type)
-      statSync(this.getSourceDir() + filename)
+      const filename = this.getDestinationDir() + `/${id}/` + this.makeFileName(id, width, height, type)
+
+      statSync(filename)
 
       return filename
     } catch (e) {
