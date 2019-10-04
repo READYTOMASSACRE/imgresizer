@@ -88,7 +88,7 @@ export class ResizerService {
       throw new HttpException('Source directory doesn\'t exist', HttpStatus.FORBIDDEN)
     }
 
-    return `${sourceDir}/${bFile.SUBDIR}/${bFile.ORIGINAL_NAME}`
+    return `${sourceDir}/${bFile.SUBDIR}/${bFile.FILE_NAME}`
   }
 
   /**
